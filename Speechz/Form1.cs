@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,8 +18,6 @@ namespace Speech_bubble_types
 
     public partial class Form1 : ExtensionForm
     {
-        private ushort roomUserTalkIncomingHeader { get; set; }
-        private ushort roomUserTalkOutgoingHeader { get; set; }
         private string speechtext_with_id = "";
         private HMessage packet;
         private bool first_timer_tick = false;
@@ -31,8 +29,6 @@ namespace Speech_bubble_types
         public Form1()
         {
             InitializeComponent();
-            roomUserTalkIncomingHeader = Game.GetMessageIds("f9fded0fea632758324e629ea60a3f87").FirstOrDefault(); //does not work with Hash Names ("RoomUserTalk") from Tanji's Hashes.ini
-            roomUserTalkOutgoingHeader = Game.GetMessageIds("42de77b85f9a094e695fa6fbeb60bc8f").FirstOrDefault();
         }
 
         private void btn_start_Click(object sender, EventArgs e)
@@ -49,11 +45,11 @@ namespace Speech_bubble_types
 
             if (rdo_client.Checked) //if "Client" is checked
             {
-                packet = new HMessage(roomUserTalkIncomingHeader, new object[] { 0, speechtext_with_id, 0, i, 0, 0 }); //construct incoming packet
+                packet = new HMessage(In.RoomUserTalk, new object[] { 0, speechtext_with_id, 0, i, 0, 0 }); //construct incoming packet
             }
             else if (rdo_server.Checked) //else if "Server" is checked
             {
-                packet = new HMessage(roomUserTalkOutgoingHeader, new object[] { speechtext_with_id, i, 0 }); //construct outgoing packet
+                packet = new HMessage(Out.RoomUserTalk, new object[] { speechtext_with_id, i, 0 }); //construct outgoing packet
             }
             
             if (packet.IsCorrupted) //check constructed packet for corruption
