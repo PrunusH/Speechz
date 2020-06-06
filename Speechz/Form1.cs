@@ -29,6 +29,7 @@ namespace Speech_bubble_types
         public Form1()
         {
             InitializeComponent();
+            nmr_interval_ValueChanged(null, null);
         }
 
         private void btn_start_Click(object sender, EventArgs e)
