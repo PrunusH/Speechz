@@ -71,8 +71,6 @@ namespace Speech_bubble_types
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            timer.Interval = Convert.ToInt32(nmr_interval.Value); //to update the interval even when the timer is running
-
             if (first_timer_tick)
             {
                 if (rdo_ascending.Checked)
@@ -155,6 +153,11 @@ namespace Speech_bubble_types
                 timer.Enabled = true;
                 btn_pause.Text = "⏸Pause";
             }
+        }
+
+        private void nmr_interval_ValueChanged(object sender, EventArgs e)
+        {
+            timer.Interval = (int)nmr_interval.Value;
         }
     }
 }
