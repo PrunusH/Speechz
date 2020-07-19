@@ -18,6 +18,8 @@ namespace Speech_bubble_types
 
     public partial class Form1 : ExtensionForm
     {
+        public override bool IsRemoteModule => true;
+
         private string speechtext_with_id = "";
         private HMessage packet;
         private bool first_timer_tick = false;
